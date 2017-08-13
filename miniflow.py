@@ -149,12 +149,11 @@ class MSE(Node):
         # an array of shape (3,1) instead.
         #
         # Making both arrays (3,1) insures the result is (3,1) and does
-        # an elementwise subtraction as expected.
+        # an element-wise subtraction as expected.
         y = self.inbound_nodes[0].value.reshape(-1, 1)
         a = self.inbound_nodes[1].value.reshape(-1, 1)
 
-        m = len(self.inbound_nodes[0].value)
-        cost = (1./m) * sum(np.square(y-a))
+        cost = np.mean(np.square(y-a))
 
         self.value = cost
 
